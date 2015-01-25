@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Sample Three.js</title>
+		<style>
+			#container {
+				background: #000;
+				width: 400px;
+				height: 300px;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div id="container">
+		
+		</div>
+
+	</body>
+	<script src="../js/jquery-1.5.1.min.js"></script>
+	<script src="../js/three.min.js"></script>
+
+	<!--Main-->
+	<script type="text/javascript">
+		//var variabler
+		var width = 400, height = 300;
+		var viewAngle = 45, aspect = width/height, near = 0.1, far = 1000;
+		//hämta id:t 'container' DOM mha JQuery
+		var $container = $('container');
+		var renderer = new THREE.WebGLRenderer();
+		var camera = new THREE.PerspectiveCamera(viewAngle,aspect,near,far);
+		var scene = new THREE.Scene();
+		scene.add(camera);
+		//camera starts at origin, pull it back a bit
+		camera.position.z = 300;
+		renderer.setSize(width,height);
+		$container.append(renderer.domElement);
+	</script>
+	</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./three.min.js"></script>
+    <script src="./jquery-1.5.1.min.js"></script>
+ <!--   <script src="./snoise3d.js"></script> -->
+    
+
+    <script id="groundVertexShader" type="x-shader/x-vertex">
+	    uniform float time;
+	    varying vec2 vUv;
+	 
+	    void main() {
+	        vUv = uv;
+	        float disp = 10.0*sin(0.1*uv[0]);
+	        vec3 newPosition = position + normal * vec3(sin(time * 0.2) * 3.0);
+	        vec3 newPosition2 = position + normal * disp;
+	        gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition2, 1.0);
+	    }
+	</script>
+	<script id="groundFragmentShader" type="x-shader/x-fragment">
+        uniform float time;
+        varying vec2 vUv;
+ 
+        void main() {
+            vec2 position = -1.0 + 2.0 * vUv;
+ 
+            float red = abs(sin(position.x * position.y + time / 5.0));
+            float green = abs(sin(position.x * position.y + time / 4.0));
+            float blue = abs(sin(position.x * position.y + time / 3.0));
+            
+            float 	r = 80.0	/255.0;
+            float 	g = 164.0  	/255.0;
+            float	b = 72.0   	/255.0;
+            
+            vec3 green1 = vec3(r, sin(100.*vUv[0])*g, b);
+
+            float	a = 100.0   	/100.0;
+            
+
+            gl_FragColor = 1.0 * vec4(green1,a);
+        }
+	</script>
+
+</head>
+<body>
+	<script src="./shaderLoader.min.js"></script>
+	<script data-src="./groundVertShader.js" data-name="ground" type="x-shader/x-vertex"></script>
+	<script data-src="./groundFragShader.js" data-name="ground" type="x-shader/x-fragment"></script>
+	
+    <script src="./main.js"></script>
+</body>
+</html>
