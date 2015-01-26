@@ -180,7 +180,7 @@ void main() {
 
     vec3 color = vec3(r, g, b) * clamp(1.2*snoise(vec3(100.*vUv.x,20.*vUv.y,2.1*time)),0.6,1.0);
 
-    float	a = 80.0   	/100.0;
+    float	a = 90.0   	/100.0;
     
     
 

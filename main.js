@@ -19,7 +19,7 @@ scene.add(pointLight);
 
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight ); //$("inHere").attr("width")
-renderer.setClearColor(0x999999,1);
+renderer.setClearColor(0x222222,1);
 //skapar canvasen vi ska jobba i
 $("#inHere").append( renderer.domElement );
 

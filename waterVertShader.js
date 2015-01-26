@@ -175,19 +175,24 @@ void main() {
     
 
     float arg = 25.*uv.x + 5.0*t;
-    float amp = 1.5 * snoise(vec3(2.*uv.x,0.5*uv.y,1.0*t));
+    float amp = 2.5 * snoise(vec3(2.*uv.x,0.5*uv.y,1.0*t));
     h = amp * sin(arg);
-    // vec3 newPosition2 = position + normal * amp * sin(arg);
+    float sinw = amp * sin(arg);
+    // sinw += abs(1.2*snoise(vec3(0.065*P.x,0.055*P.y, t)));
+     vec3 newPosition2 = position + normal * sinw;
 
-    vec3 newPosition2 = position + normal * abs(snoise(100.*vec3(position.x,position.y,0.01*t))) * sin(arg);
+    //vec3 newPosition2 = position + normal * abs(snoise(100.*vec3(position.x,position.y,0.01*t))) * sin(arg);
 
     // vec3 newPosition2 = vec3(position.x, position.y , position.z) + normal * 4. * snoise(vec3(2.*uv.x,0.5*uv.y,1.0*t)) * sin(25.*uv.x + 5.*t); /// (10.*t*uv.x);
 
     //P*=40.;
 
-    float height = abs(snoise(vec3(0.035*P.x,0.025*P.y, t)));
+    float height = abs(1.4*snoise(vec3(0.095*P.x,0.095*P.y, t)));
 	// height *= height*4*zcomp(P);
-	 height += 2. * snoise(0.1*P) -0.5; 
+	 // height += 0.6 * abs(snoise(vec3(0.28*P.x,0.28*P.y, t)));
+   // height += 0.3 * abs(snoise(vec3(0.14*P.x,0.14*P.y, t)));
+   // height += 1.2*sin(arg); 
+
 	 // height += 0.125 * snoise(8.*P) -0.5;
 	 // height += 0.06125 * snoise(16.*P) -0.5;
 	//nollställ allt "under vatten ytan"

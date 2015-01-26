@@ -198,7 +198,7 @@ void main() {
     vec3 dessertSand = vec3(0.92, 0.73, 0.53);
     vec3 darkSand = 0.99*vec3(140.0/255.0, 70.0/255.0, 20.0/255.0);
     vec3 bottomSand = dirtySand * max(snoise(vec3(144.*position.x,189.*position.y,1.)), 0.1);
-    vec3 sand = mix(lightSand,dirtySand,0.5*snoise(10.*vec3(10.*position.x,2.*position.y,1.0)));//snoise(vec2(25.*vUv.x,50.*vUv.y))
+    vec3 sand = mix(lightSand,dirtySand,0.5*snoise(10.*vec3(10.*position.x,2.*position.y,1.5*h)));//snoise(vec2(25.*vUv.x,50.*vUv.y))
     vec3 sand2 = mix(lightSand,dirtySand,0.5*snoise(10.*vec3(10.*position.x,2.*position.y,0.1*t*h)));//snoise(vec2(25.*vUv.x,50.*vUv.y))
     // sand = sand * snoise(vec3(position.x,position.y,t));
     grass = mix(grass,1.5*grass,max(snoise(10.*(0.0+h)*vec2(15.*position.x,5.*position.y))-0.2,0.0));
@@ -206,7 +206,7 @@ void main() {
 
     vec3 dirtMix = mix(darkSand,grass, max(0.7*snoise(10.*(0.0+h)*vec2(6.*position.x,2.*position.y))-0.2,0.0));
     vec3 mediumMix = mix(darkSand,lightSand,  max(0.5*snoise(10.*(0.0+h)*vec2(12.*position.x,4.*position.y))-0.2,0.0));
-    vec3 lightMix = mix(lightSand,darkSand, max(0.7*snoise(10.*(0.0+h)*vec2(60.*position.x,20.*position.y))-0.1,0.0));
+    vec3 lightMix = mix(lightSand,darkSand, max(0.5*snoise(10.*(0.0+h)*vec2(20.*position.x,20.*position.y))-0.1,0.0));
     float noise2 = 0.5 * snoise(vec3(vUv.x*0.3, vUv.y*0.1,1.0));
     // vec3 sand = (1.0 - noise2*2.0) * dirtySand + noise2*2.0*lightSand;
     float h2 = (max(h,0.8) - 0.8 ) * 5.0;
@@ -218,7 +218,7 @@ void main() {
     float l2 = 0.35;
     float l3 = 0.100;
     vec3 finalColor = (h>l0) ? grassMix : (h>l1) ? mix(dirtMix,grassMix,smoothstep(l1,l0,h)) : 
-    (h>l2) ? mix(lightSand, mediumMix,smoothstep(l2,l1,h)) : (h>l3) ? mix(sand,lightSand,smoothstep(l3,l2,h)) : (h>0.09) ? sand : sand;
+    (h>l2) ? mix(lightMix, mediumMix,smoothstep(l2,l1,h)) : (h>l3) ? mix(sand,lightMix,smoothstep(l3,l2,h)) : (h>0.09) ? sand : sand;
     //finalColor = dessertSand * h;
     //float lvl1 = 0.8;
 
